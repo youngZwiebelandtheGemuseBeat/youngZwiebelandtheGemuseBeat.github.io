@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luca - Portfolio</title>
+    <link rel="icon" href="assets/dp.jpeg" type="image/jpeg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: "black", /*"#0a0a0a",*/
+                        light: "#fcfbf7",
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=EB+Garamond:ital@0;1&family=Space+Mono&display=swap');
+        .text-shadow-glow-subtle {
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.419);
+        }
+        .font-garamond {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+        }
+
+        .nav-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 640px) {
+            .nav-container {
+                gap: 2rem;
+            }
+        }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #000000;
+            /* color: #202020; */
+        }
+        
+        .dark .nav-link:hover {
+            color: #ffffff;
+        }
+
+        /* .dark .link-github {
+          color: red;
+          transition: color 0.3s ease;
+        } */
+
+        .dark .link-github:hover {
+          color:#ff00ae;
+        }
+
+        .dark .link-instagram:hover {
+          color:#cb0000;
+        }
+
+        .dark .link-soundcloud:hover {
+          color:#ff8c00;
+        }
+
+        .dark .link-mail:hover {
+          color:#0091ff;
+        }
+
+        .dark .link-itchio:hover {
+          color:#11ac00;
+        }
+
+        .tech-icon {
+            width: 64px;
+            height: 64px;
+            transition: filter 0.3s ease, transform 0.3s ease;
+            fill: #718096;
+        }
+        .tech-icon {
+            filter: invert(0.5);
+        }
+        .tech-icon:hover {
+            filter: invert(0);
+            transform: scale(1.5);
+        }
+        .dark .tech-icon {
+          fill: #718096;
+        }
+        .dark .tech-icon:hover {
+            filter: invert(1);
+            transform: scale(1.5);
+        }
+
+        /* .dark .icon-c:hover {
+          fill: blue;
+        }
+        .icon-c:hover {
+          fill: blue;
+        } */
+
+        .squircle {
+            margin-top: 0.55%;
+            width: 180px;
+            height: 360px;
+            /* border-radius: 100%; */
+            overflow: hidden;
+        }
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (min-width: 740px) {
+            .nav-container {
+                display: grid;
+                grid-template-columns: repeat(6, auto);
+                justify-content: center;
+                gap: 2rem;
+            }
+            .squircle {
+                width: 180px;
+                height: 360px;
+            }
+        }
+        .font-space-mono {
+            font-family: 'Space Mono', monospace;
+        }
+        .footer-text {
+            transition: letter-spacing 0.8s ease;
+        }
+        /* .footer-text:hover {
+            letter-spacing: 4px;
+        } */
+        .button {
+            font-size: 17px;
+            font-weight: 600;
+            padding: 8px 16px;
+            /*border-radius: 980px;*/
+            transition: all 0.3s ease;
+        }
+        .button-filled {
+            background-color: #ff8c00;
+            color: #000000;
+        }
+        .button-filled:hover {
+            transform: scale(1.15);
+        }
+        .button-outlined {
+            background-color: #007AFF;
+            border: 2px solid #007AFF;
+            color: #FFFFFF;
+        }
+        .button-outlined:hover {
+            transform: scale(1.15);
+        }
+        .chevron-down {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s 3;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        #about {
+          /* color:#000000; */
+        }
+        .about-text {
+            font-size: 15px; /* Default size for mobile */
+            text-align: justify;
+            /* color: #000000; */
+        }
+
+        .about-text-signature {
+          font-size: 24px; /* Default size for mobile */
+          text-align: right;
+          /* color: #000000; */
+        }
+
+        @media (min-width: 768px) {
+            .about-text {
+                font-size: 19px; /* Larger size for desktop */
+            }
+        }
+
+        .rdk-hover {
+            text-decoration: underline;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .rdk-hover::after {
+            content: "What is RDK-B?";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #147eff;
+            color: black; /*#282232;*/
+            padding: 4px 8px;
+            /* border-radius: 7px; */
+            font-size: 16px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        
+        .rdk-hover:hover::after {
+            opacity: 1;
+        }
+
+        #project {
+          color:#000000;
+        }
+        
+        .project-thumbnail {
+            position: relative;
+            overflow: hidden;
+            /* border-radius: 0.5rem; */
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            aspect-ratio: 2 / 1;
+        }
+        
+        .project-thumbnail:hover {
+            transform: scale(1.05);
+        }
+        
+        .project-thumbnail:hover .redirect-icon {
+            opacity: 1;
+        }
+        
+        .redirect-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .redirect-icon svg {
+            color: white;
+            width: 2rem;
+            height: 2rem;
+        }
+
+        .read-more {
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            text-decoration: underline;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        @media (max-width: 640px) {
+            .projects-container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+            
+            .project-tile {
+                margin-bottom: 1rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
+
+            }
+        }
+        
+        .repo-actions {
+            display: flex;
+            justify-content: flex-start;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .repo-action {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.875rem;
+            color: #718096;
+            transition: color 0.3s ease;
+        }
+        
+        .repo-action:hover {
+            color: #2d3748;
+        }
+        
+        .dark .repo-action:hover {
+            color: #e2e8f0;
+        }
+
+        /* General Styles */
+#resume {
+    padding: 2rem 0;
+}
+
+.resume-columns {
+    display: flex;
+    flex-wrap: wrap; /* Ensures columns wrap on smaller screens */
+    gap: 2rem; /* Space between columns */
+}
+
+.resume-column {
+    flex: 1; /* Ensures columns are equal width */
+    min-width: 300px; /* Prevents columns from shrinking too small */
+}
+
+.languages-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns for languages */
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .resume-columns {
+        flex-direction: column; /* Stacks columns vertically on smaller screens */
+    }
+    
+    .resume-column {
+        width: 100%; /* Columns take up full width */
+    }
+}
+
+    </style>
+</head>
+<body class="dark bg-black text-white min-h-screen flex flex-col font-['Inter'] transition-colors duration-300"></body>
+    <div class="absolute top-8 right-8 z-10">
+        <!-- <button id="themeToggle" class="p-2 rounded-lg bg-dark dark:bg-light text-light dark:text-dark w-10 h-10 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+        </button> -->
+    </div>
+
+    <main class="flex-grow flex flex-col">
+        <!-- Hero Section -->
+        <section class="flex items-center justify-center min-h-screen">
+            <div class="text-center max-w-4xl mx-auto px-4">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-2 tracking-tighter leading-none text-space-mono">
+                    Music. Code. Inspiration.
+                    <!-- <span class="font-garamond font-normal">Balasubhramanyam</span> -->
+                </h1>
+                <p class="text-xl md:text-2xl font-space-mono mb-8">
+                    <span class="text-gray-600 dark:text-[#C9C9C9]">I am Luca Candussi and this is my portfolio.</span>
+                    <!-- <span class="bg-gradient-to-r from-[#C9C9C9] to-[#FFA500] text-transparent bg-clip-text">Portfolio</span> -->
+                </p>
+            </div>
+            <!-- Add the chevron-down icon -->
+            <div class="chevron-down">
+                <i data-lucide="chevron-down" class="w-8 h-8"></i>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="section py-20 bg-dark">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-8 text-center font-space-mono">About Me</h2>
+                <div class="flex flex-col md:flex-row items-center md:items-start justify-center space-y-8 md:space-y-0 md:space-x-12">
+                    <div class="squircle bg-gray-300 dark:bg-gray-700 flex-shrink-0">
+                        <img src="assets/img/me_2.jpg" alt="AnalogMan-on-Fotzhobl" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="max-w-2xl">
+                        <p class="about-text font-space-mono">
+                          Since the usual curriculum vitae is supposed to be short and to the point and I see myself as developer and artist I thought why should not I take that bit of work in account and tackle the task of creating my own homepage showing off my projects ranking from music production to indie game development while telling a little bit about me and my professional background so far. Thanks for taking this bit of time reading, listening, playing and scrolling your way through this simple but hopefully effective website. Feel free to contact me in case you are in need of any information about me or my projects in greater detail. I highly appreciate constructive feedback regarding this website or information about any bugs, malfunctions or inconsistencies you might find on this page too, since I consider myself more of a low level, backend developer down in C or C++ than a frontend web designer.
+                          Besides programming and developing games I spend my time composing and performing music in various scenarios therefore I suggest checking out links and references to external sources as well. Although I did/do my best embedding everything into this page as well as I can.
+                          <br><br>
+                          Nice that you are here.
+                        </p>
+                        <p class="about-text-signature font-space-mono">Luca</p>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section py-16 bg-black">
+            <div class="container mx-auto px-8 sm:px-16">
+                <h2 class="text-3xl font-bold mb-16 text-center font-space-mono">My Tools</h2>
+                <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-12 place-items-center">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/c.svg" alt="C" class="tech-icon icon-c">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/cplusplus.svg" alt="C++" class="tech-icon icon-cpp">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/cmake.svg" alt="CMake" class="tech-icon icon-cmake">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/lua.svg" alt="Lua" class="tech-icon icon-lua">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/unity.svg" alt="Unity" class="tech-icon icon-unity">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/musescore.svg" alt="MuseScore" class="tech-icon icon-musescore">
+                    <!-- <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/guitarpro.svg" alt="GuitarPro" class="tech-icon"> -->
+                    <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Logic_Pro_X_logo.png" alt="Logic Pro X" width="32" height="32" class="tech-icon"> -->
+                    <!-- <img src="https://nerdyteachers.com/PICO-8/resources/img/logo/pico-8-logo.png" alt="PICO-8" width="32" height="32" class="tech-icon"> -->
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="tech-icon" width="32" height="32">
+                      <path d="M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7l0 72 0 264c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6L448 147 192 223.8 192 432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6L128 200l0-72c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z"/>
+                    </svg> -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Links Section -->
+        <section id="links" class="section py-16 bg-black">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-16 text-center font-space-mono">Find me on ..</h2>
+                <nav class="nav-container">
+                    <a href="https://github.com/youngZwiebelandtheGemuseBeat" class="nav-link text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-bold link-github">
+                        <i data-lucide="github" class="w-6 h-6"></i>
+                        git
+                    </a>
+                    <!-- <a href="/resume" class="nav-link text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-bold">
+                        <i data-lucide="file-text" class="w-6 h-6"></i>
+                        resume
+                    </a> -->
+                    <!-- <a href="https://www.linkedin.com/in/akash-balasubhramanyam/" class="nav-link text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-bold">
+                        <i data-lucide="linkedin" class="w-6 h-6"></i>
+                        LinkedIn
+                    </a> -->
+                    <a href="https://instagram.com/youngZwiebelandtheGemuseBeat" class="nav-link text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-bold link-instagram">
+                        <i data-lucide="instagram" class="w-6 h-6"></i>
+                        instagram
+                    </a>
+                    <a href="https://bazookaluca.itch.io" class="nav-link text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-bold link-itchio">
+                        <i class="fab fa-itch-io"></i>
+                        itch.io
+                    </a>
+                    <a href="https://soundcloud.com/luca-candussi" class="nav-link text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-bold link-soundcloud">
+                      <i class="fab fa-soundcloud"></i>
+                        soundcloud
+                    </a>
+                    <a href="mailto:youngzwiebelandthegemusebeat@gmail.com" class="nav-link text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-bold link-mail">
+                        <i data-lucide="mail" class="w-6 h-6"></i>
+                        contact
+                    </a>
+                </nav>
+            </div>
+        </section>
+
+      <!-- Resume Section -->
+      <section id="resume" class="section py-20 bg-dark font-space-mono">
+        <div class="container mx-auto px-4 max-w-screen-lg">
+            <h2 class="text-3xl font-bold mb-8 text-center">My Resume</h2>
+            <div class="mb-12">
+                <p class="about-text text-justify">
+                    Currently, I work at <i>Graz University of Technology</i> as a software developer while continuing my Master's degree in <i>Signal Processing</i> and <i>Computer Music</i>. I am a C enthusiast with a passion for low-level programming. My interest in programming has grown since my bachelor's degree, where I focused on expanding my skills. I'm also exploring game development using Unity (C#), Pico-8 (Lua), and web technologies. Before the pandemic, I actively participated in musical projects both live and in the studio.
+                </p>
+            </div>
+    
+            <div class="flex flex-col md:flex-row md:gap-12">
+                <!-- Experience Column -->
+                <div class="flex-1 space-y-6">
+                    <div class="resume-section">
+                        <h3 class="text-xl font-bold mb-4">Experience</h3>
+                        <p>
+                            <strong>2023 – now:</strong> Backend developer, <i>Graz University of Technology</i><br>
+                            Development of the open-source <i>finite element method</i> solver openCFS, integrating NiHu boundary element method.<br>
+                            <small class="text-gray-400"> - C++ / CMake</small>
+                        </p>
+                        <br>
+                        <p>
+                            <strong>2022 – 2023 (part-time):</strong> Employee, <i>Vinum Virunum</i> (viticulture)<br>
+                            <small class="text-gray-400"> - Social media / harvesting / tasting</small>
+                        </p>
+                        <br>
+                        <p>
+                            <strong>7/2018 – 8/2018:</strong> Recording Engineer, <i>ORF (Austrian Broadcasting Corporation)</i><br>
+                            Recorded classical concerts for the <i>Styriarte in Graz</i> series.
+                        </p>
+                        <br>
+                        <p>
+                            <strong>2015 – 2017:</strong> Day Care Worker, <i>Schülerhort Okidoki</i><br>
+                            Auxiliary staff in summer care.
+                        </p>
+                    </div>
+                </div>
+    
+                <!-- Education & Languages Column -->
+                <div class="flex-1 space-y-6">
+                    <div class="resume-section">
+                        <h3 class="text-xl font-bold mb-4">Education</h3>
+                        <p>
+                            <strong>2023 – now:</strong> Master's Degree, University of Music and Performing Arts Graz & Graz University of Technology<br>
+                            Electrical Engineering and Audio Engineering (Elektrotechnik Toningenieur)
+                        </p>
+                        <br>
+                        <p>
+                            <strong>2015 – 2023:</strong> Bachelor's Degree, University of Music and Performing Arts Graz & Graz University of Technology<br>
+                            Electrical Engineering and Audio Engineering (Elektrotechnik Toningenieur)
+                        </p>
+                    </div>
+    
+                    <div class="resume-section">
+                        <h3 class="text-xl font-bold mb-4">Languages</h3>
+                        <div class="grid grid-cols-2 gap-2">
+                            <p><strong>German:</strong> Native</p>
+                            <p><strong>English:</strong> Fluent</p>
+                            <p><strong>Italian:</strong> Conversational</p>
+                            <p><strong>Dutch:</strong> Basic</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+       
+        <!-- Projects Section -->
+        <section id="projects" class="section py-20 bg-dark">
+            <div class="container mx-auto px-4 max-w-6xl projects-container">
+                <h2 class="text-3xl font-bold mb-12 text-center font-space-mono">Projects</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project tiles will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer class="w-full py-4 border-t border-black">
+      <p class="text-center font-space-mono text-sm footer-text">made with love in 2024 by Luca Candussi</p>
+        <!-- <p class="text-center font-space-mono text-sm uppercase cursor-pointer footer-text" onclick="rickRoll()">
+            CLICK HERE TO GET OUT OF THE MATRIX
+        </p> -->
+    </footer>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: "black", /*"#0a0a0a",*/
+                        light: "#fcfbf7",
+                        secondary: "#202020"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="dark bg-black text-white min-h-screen flex flex-col font-['Inter'] transition-colors duration-300">
+    <script>
+        lucide.createIcons();
+        
+        // Scroll reveal effect
+        function revealSections() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (sectionTop < windowHeight * 0.75) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealSections);
+        window.addEventListener('load', revealSections);
+
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Function to set the theme
+        function setTheme(isDark) {
+            if (isDark) {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+            // updateIcon(isDark);
+            localStorage.setItem('darkMode', isDark);
+        }
+
+        // Function to update the icon
+        // function updateIcon(isDark) {
+        //     themeToggle.innerHTML = isDark
+        //         ? '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>'
+        //         : '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>';
+        // }
+
+        // Function to get system preference
+        function getSystemPreference() {
+            return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
+        // Function to set initial theme
+        function setInitialTheme() {
+            const savedTheme = localStorage.getItem('darkMode');
+            if (savedTheme !== null) {
+                setTheme(JSON.parse(savedTheme));
+            } else {
+                setTheme(getSystemPreference());
+            }
+        }
+
+        // Toggle theme when button is clicked
+        // themeToggle.addEventListener('click', () => {
+        //     const isDark = !html.classList.contains('dark');
+        //     setTheme(isDark);
+        // });
+
+        // Listen for system preference changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (localStorage.getItem('darkMode') === null) {
+                setTheme(e.matches);
+            }
+        });
+
+        // Set initial theme
+        setInitialTheme();
+
+        function rickRoll() {
+            window.open("https://www.youtube.com/watch?v=xvFZjo5PgG0", "_blank");
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const rdkElements = document.querySelectorAll('.rdk-hover');
+            rdkElements.forEach(element => {
+                element.addEventListener('click', function() {
+                    if (this.textContent === 'RDK-B') {
+                        window.open('https://wiki.rdkcentral.com/display/RDK/RDK-Broadband', '_blank');
+                    } else if (this.textContent === 'RDK') {
+                        window.open('https://en.wikipedia.org/wiki/Reference_Design_Kit', '_blank');
+                    }
+                });
+            });
+        });
+
+        // Project data
+        const projects = [
+          {
+            title: "hybris demake",
+            description: "My Pico-8 version of a project I did with DieDreiMuskeltiere called <i>Hybris - Pride goes before a Fall</i>",
+            url: "https://bazookaluca.itch.io/hybris",
+            image: "https://img.itch.zone/aW1nLzE2MDM0OTg4LnBuZw==/315x250%23c/hN3gqS.png"
+          },
+          {
+            title: "Chazz, just another esoteric programming language",
+            description: "For the sake of learning and trying new things I created my own esoteric programming language based on chess notation (.fen) as a project at university.",
+            url: "https://github.com/youngZwiebelandtheGemuseBeat/chazz",
+            image: "https://opengraph.githubassets.com/1/youngzwiebelandthegemusebeat/chazz"
+          },
+          {
+            title: "On the harmonica for HUAT",
+            description: "Fortunately I found a band that actually needs and can handle quite a load of harmonica.",
+            url: "https://www.huat.at",
+            image: "https://huat.at/wp-content/uploads/2024/05/HUAT-Logo-W.png"
+          },
+          {
+            title: "Dreierschnapsen in C",
+            description: "A pure C implementation of an Austrian three player card game classic.",
+            url: "https://github.com/youngZwiebelandtheGemuseBeat/Dreierschnapsen",
+            image: "https://opengraph.githubassets.com/1/youngzwiebelandthegemusebeat/dreierschnapsen"
+          },
+          {
+            title: "reusable online card game framework",
+            description: "I am a huge fan of card games and therefore I am currently working on setting up an open source <i>reusable online card game framework</i> as a platform for any kind of multiplayer card game.",
+            url: "https://github.com/youngZwiebelandtheGemuseBeat/online-card-game-framework-3",
+            // image: "https://opengraph.githubassets.com/1/youngzwiebelandthegemusebeat/online-card-game-framework-3"
+            image: "assets/img/tarock_1.jpg"
+          },
+          {
+            title: "Tampoon",
+            description: "A catcher game representing a tampon's hard work created for a menstruation awareness exhibition in 2023.",
+            url: "https://bazookaluca.itch.io/tampoon",
+            image: "https://img.itch.zone/aW1nLzE0OTkxNjE4LnBuZw==/315x250%23c/vgm1IT.png"
+          },
+          {
+            title: "<b>Bazooka Luca's Hot Sauce</b>",
+            description: "I regularly ferment my own <i>HotSauce</i>. My recipe is fairly simple though.",
+            url: "",
+            image: "assets/img/hot-sauce_3.jpg"
+          },
+          {
+            title: "My Portfolio",
+            description: "After many many iterations, failure and copying what appeals to me, here is my handmade portfolio website.",
+            url: "https://github.com/youngZwiebelandtheGemuseBeat/youngZwiebelandtheGemuseBeat.github.io",
+            image: "https://opengraph.githubassets.com/1/youngzwiebelandthegemusebeat/luca-candussi.github.io"
+          },
+          {
+            title: "Working on openCFS",
+            description: "Currently I am helping to maintain the open source finite element solver <i>openCFS</i>.",
+            url: "https://opencfs.org",
+            image: "assets/img/openCFS.jpg"
+          },
+          {
+            title: "Room Acoustics and Composition",
+            description: "In my Bachelor's Thesis I re-imagined historic concerts and the rooms/halls they were performed in trying to answer the questions whether today's performances are historically accurate and whether it makes sense to try doing so and how.",
+            url: "",
+            image: "assets/img/markImage2.jpg"
+          },
+          {
+            title: "Integrating BEM and FEM software frameworks",
+            description: "A thesis describing the process of integrating two pre-existing open source numerical solvers into a common workflow.",
+            url: "",
+            image: "assets/img/fembem.png"
+          },
+          {
+            title: "Hybris - Pride goes before a Fall by DieDreiMuskeltiere",
+            description: "<b>Flappy Bird</b> on steroids may describe it best. A <i> Unity </i> game we created during a class at university.",
+            url: "https://die-drei-muskeltiere.itch.io/hybris",
+            image: "https://img.itch.zone/aW1nLzE0MzQ4OTk2LmpwZw==/315x250%23c/kCfEIb.jpg"
+          },
+          {
+            title: "Composition and Score: Hybris - Pride goes before a Fall",
+            description: "I implemented the whole audio backend from scratch in Unity and composed the score as well as did the sound design for <b>Hybris</b>.",
+            url: "https://soundcloud.com/luca-candussi/off-the-island",
+            image: "https://cdn.prod.website-files.com/63fa59511d416a288382704f/643dbf1f780af97dd85d70d6_soundcloud-opengraph-black.jpg"
+          },
+          {
+            title: "Deep Learning: Early Hair Loss Classification",
+            url: "https://www.youtube.com/watch?v=xvFZjo5PgG0",
+            description: "A project for AI/ML coursework at university.",
+            image: "https://opengraph.githubassets.com/1/"
+          },
+          {
+            title: "The <i>Fotzhob'l</i> Method <i>(working title)</i>",
+            description: "Besides performing and composing music I use my free time to sum up all the things I learned - and wish somebody had taught me - musically, focusing on the harmonica by introducing technique and basic harmony theory, in a paper, book or whatever it may be in the end.",
+            url: "",
+            image: "assets/img/harmonica_4.png"
+          },
+          {
+            title: "John Cage on Pico-8",
+            url: "https://www.lexaloffle.com/bbs/?pid=interpretation_4_33",
+            description: "My interpretation of John Cage's <i>4:33</i>.",
+            // image: "https://www.lexaloffle.com/gfx/jelpi_demo.gif"
+            image: "/assets/img/4.33_candussi_1313390.p8.png"
+          },
+          {
+            title: "DieDruckerIdee",
+            url: "https://git.iem.at/aronpetritz/diedruckeridee",
+            description: "Currently two colleges of mine and me are working on an installation regarding the topic <i>deterioration and saturation in transmission and transformation of sound and vision</i>.",
+            // image: "https://www.lexaloffle.com/gfx/jelpi_demo.gif"
+            image: "https://opengraph.githubassets.com/1/"
+          },
+          // {
+          //   title: "RPS <i>- work in progress</i>",
+          //   description: "The idea: <i>Rock, Paper, Scissors</i> meets <i>Shoot'em Up</i>.",
+          //   url: "https://bazookaluca.itch.io/rps",
+          //   image: "https://img.itch.zone/aW1nLzE0OTkxNjA3LnBuZw==/315x250%23c/NlnttT.png"
+          // }
+        ];
+
+        // Function to create project tiles
+        function createProjectTiles() {
+            const projectsContainer = document.querySelector('#projects .grid');
+            projects.forEach(project => {
+                const tile = document.createElement('div');
+                tile.className = 'project-tile';
+                tile.innerHTML = `
+                    <div class="project-thumbnail mb-4">
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover">
+                        <div class="redirect-icon">
+                            <i data-lucide="external-link"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">${project.title}</h3>
+                    <p class="text-sm text-gray-400 mb-4">${project.description}</p>
+                `;
+                const thumbnail = tile.querySelector('.project-thumbnail');
+                thumbnail.addEventListener('click', () => window.open(project.url, '_blank'));
+                projectsContainer.appendChild(tile);
+            });
+            lucide.createIcons();
+        }
+
+        // end of project tile
+        // <div class="repo-actions">
+        //                 <a href="${project.url}/stargazers" target="_blank" class="repo-action">
+        //                     <i data-lucide="star"></i>
+        //                     Star
+        //                 </a>
+        //                 <a href="${project.url}/fork" target="_blank" class="repo-action">
+        //                     <i data-lucide="git-fork"></i>
+        //                     Fork
+        //                 </a>
+        //             </div>
+
+        // Call the function to create project tiles
+        createProjectTiles();
+        
+    </script>
+</body>
+</html>
