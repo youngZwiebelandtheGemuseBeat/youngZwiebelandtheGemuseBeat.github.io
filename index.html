@@ -793,7 +793,15 @@
                     <p class="text-sm text-gray-400 mb-4">${project.description}</p>
                 `;
                 const thumbnail = tile.querySelector('.project-thumbnail');
-                thumbnail.addEventListener('click', () => window.open(project.url, '_blank'));
+                // thumbnail.addEventListener('click', () => window.open(project.url, '_blank'));
+                thumbnail.addEventListener('click', () => {
+                // Check if the project has a URL (e.g., PDF link)
+                if (project.url) {
+                    window.open(project.url, '_blank'); // Open the PDF or link
+                } else {
+                    window.open(project.image, '_blank'); // Fallback to open the image
+                }
+            });
                 projectsContainer.appendChild(tile);
             });
             lucide.createIcons();
