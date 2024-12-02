@@ -703,7 +703,7 @@
           {
             title: "<b>Bazooka Luca's Hot Sauce</b>",
             description: "I regularly ferment my own <i>HotSauce</i>. My recipe is fairly simple though.",
-            url: "",
+            url: "assets/img/hot-sauce_3.jpg",
             image: "assets/img/hot-sauce_3.jpg"
           },
           {
@@ -721,13 +721,13 @@
           {
             title: "Room Acoustics and Composition",
             description: "In my Bachelor's Thesis I re-imagined historic concerts and the rooms/halls they were performed in trying to answer the questions whether today's performances are historically accurate and whether it makes sense to try doing so and how.",
-            url: "",
+            url: "assets/documents/Raumakustik_und_Komposition_Bachelorarbeit_Luca_Candussi.pdf",
             image: "assets/img/markImage2.jpg"
           },
           {
             title: "Integrating BEM and FEM software frameworks",
             description: "A thesis describing the process of integrating two pre-existing open source numerical solvers into a common workflow.",
-            url: "",
+            url: "assets/documents/Candussi_TI_Project_ver2.8.pdf",
             image: "assets/img/fembem.png"
           },
           {
@@ -751,7 +751,7 @@
           {
             title: "The <i>Fotzhob'l</i> Method <i>(working title)</i>",
             description: "Besides performing and composing music I use my free time to sum up all the things I learned - and wish somebody had taught me - musically, focusing on the harmonica by introducing technique and basic harmony theory, in a paper, book or whatever it may be in the end.",
-            url: "",
+            url: "assets/img/harmonica_4.png",
             image: "assets/img/harmonica_4.png"
           },
           {
@@ -793,7 +793,15 @@
                     <p class="text-sm text-gray-400 mb-4">${project.description}</p>
                 `;
                 const thumbnail = tile.querySelector('.project-thumbnail');
-                thumbnail.addEventListener('click', () => window.open(project.url, '_blank'));
+                // thumbnail.addEventListener('click', () => window.open(project.url, '_blank'));
+                thumbnail.addEventListener('click', () => {
+                // Check if the project has a URL (e.g., PDF link)
+                if (project.url) {
+                    window.open(project.url, '_blank'); // Open the PDF or link
+                } else {
+                    window.open(project.image, '_blank'); // Fallback to open the image
+                }
+            });
                 projectsContainer.appendChild(tile);
             });
             lucide.createIcons();
