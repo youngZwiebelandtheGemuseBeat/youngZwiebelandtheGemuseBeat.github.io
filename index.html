@@ -158,7 +158,7 @@
             transition: all 0.3s ease;
         }
         .button-filled {
-            background-color: #ff8c00;
+            background-color: rgb(255, 255, 255);
             color: #000000;
         }
         .button-filled:hover {
@@ -474,14 +474,23 @@
       <section id="resume" class="section py-20 bg-dark font-space-mono">
         <div class="container mx-auto px-4 max-w-screen-lg">
             <h2 class="text-3xl font-bold mb-8 text-center">My Resume</h2>
-            <div class="mb-12">
+
+            <!-- Button instead of full resume -->
+            <div class="flex justify-center space-x-4 mb-12">
+              <a href="/assets/documents/CV_developer_cv_20240408.pdf" class="button button-filled flex items-center space-x-2">
+                  <span>Download CV</span>
+                  <i data-lucide="file" class="w-5 h-5"></i>
+              </a>
+            </div>
+
+            <!-- <div class="mb-12">
                 <p class="about-text text-justify">
                     Currently, I work at <i>Graz University of Technology</i> as a software developer while continuing my Master's degree in <i>Signal Processing</i> and <i>Computer Music</i>. I am a C enthusiast with a passion for low-level programming. My interest in programming has grown since my bachelor's degree, where I focused on expanding my skills. I'm also exploring game development using Unity (C#), Pico-8 (Lua), and web technologies. Before the pandemic, I actively participated in musical projects both live and in the studio.
                 </p>
             </div>
     
             <div class="flex flex-col md:flex-row md:gap-12">
-                <!-- Experience Column -->
+
                 <div class="flex-1 space-y-6">
                     <div class="resume-section">
                         <h3 class="text-xl font-bold mb-4">Experience</h3>
@@ -509,7 +518,6 @@
                     </div>
                 </div>
     
-                <!-- Education & Languages Column -->
                 <div class="flex-1 space-y-6">
                     <div class="resume-section">
                         <h3 class="text-xl font-bold mb-4">Education</h3>
@@ -534,7 +542,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
     
