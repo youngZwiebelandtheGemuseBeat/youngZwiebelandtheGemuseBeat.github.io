@@ -1,16 +1,109 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>My Recipe</title>
-    </head>
-    <body>
-        <p>After several iterations and attempts to create the taste I am looking for in a hot sauce I found solace in simplicity. I call it Bazooka Luca's 80/20-Mix.
-          <br><br>
-          Would you like to give it a try yourself?<br>Here is my recipe:
-          <br><br>
-          80% Habaneros, 20% CarolinaReapers, no seeds, no pith, 20% brine, ferment for two weeks, mix and process in a mouli-légumes, 80% chili mix + 20% white wine vinegar.
-          <br><br>
-          Enjoy!
-        </p>
-    </body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bazooka Luca's 80/20 Hot Sauce</title>
+<link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: #000000; /* light parchment color */
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    font-family: 'Just Another Hand', cursive;
+}
+
+.paper {
+    position: relative;
+    width: 480px;
+    min-height: 600px;
+    background: rgba(255,248,230,0.95);
+    padding: 60px 40px 40px 50px;
+    box-shadow: 5px 5px 25px rgba(0,0,0,0.3);
+    border-radius: 15px;
+    border: 2px solid #d2b48c;
+}
+
+.paper::before {
+    content: '';
+    position: absolute;
+    left: 40px;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: rgba(255,0,0,0.4); /* red margin line */
+}
+
+.lines {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.03) 0px,
+        rgba(0,0,0,0.03) 1px,
+        transparent 2px,
+        transparent 28px
+    );
+}
+
+.Lettertext {
+    position: relative;
+    top: 0;
+    left: 10px;
+    right: 10px;
+    line-height: 35px; /* more spacing between lines */
+    font-family: 'Just Another Hand', cursive;
+    font-size: 1.4em;
+    color: #3b2f2f;
+    word-break: break-word;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Just Another Hand', cursive;
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: #2b1f0f;
+}
+</style>
+</head>
+<body>
+<div class="paper">
+    <h1>Bazooka Luca's 80/20 Mix</h1>
+    <div class="lines">
+        <div class="Lettertext">
+            After several iterations and attempts to create the taste I am looking for in a hot sauce, I found solace in simplicity. I call it Bazooka Luca's 80/20-Mix.
+            <br><br>
+            Would you like to give it a try yourself? Here is my recipe:
+            <br><br>
+            80% Habaneros, 20% Carolina Reapers, no seeds, no pith<br>
+            20% brine, ferment for two weeks<br>
+            Mix and process in a mouli-légumes<br>
+            80% chili mix + 20% white wine vinegar
+            <br><br>
+            Enjoy!
+        </div>
+    </div>
+</div>
+<div class="paper">
+<h1>Bazooka Luca's 50/50 Mix</h1>
+    <div class="lines">
+        <div class="Lettertext">
+            Just recently I discovered a second even simpler but even better recipe. I call it Bazooka Luca's 80/20-Mix.
+            <br><br>
+            Would you like to give it a try yourself? Here is my recipe:
+            <br><br>
+            100% Carolina Reapers, no seeds, no pith<br>
+            30% brine, ferment for two months (good chance that the fermentation stopped after a couple of weeks already though)<br>
+            Mix and process in a mouli-légumes<br>
+            50% chili + 50% white wine vinegar
+            <br><br>
+            Enjoy!
+        </div>
+    </div>
+</div>
+  </body>
 </html>
